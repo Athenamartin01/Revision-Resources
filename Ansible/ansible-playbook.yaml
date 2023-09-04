@@ -1,0 +1,44 @@
+#playbooks allow for tasks to be run one after the other
+#to run a playbook, ansible-playbook <name of playbook file>
+- hosts: localhost
+  tasks:
+  - name: this is task1
+    become: True
+    ansible.builtin.apt:
+      #module arguements
+      name: nginx
+      start: present
+  - name: this is task2
+    ansible.builtin.file:
+      path: /home/ubuntu/somefoldername
+      state: directory
+  - name: this is task3
+    become: True
+    ansible.builtin.systemd_service:
+    ignore_errors: True #runs regardless of errors
+    ignore_errors
+      name: nginx
+      state: restarted
+  - name:
+    copy:
+      content: 'AHHHH'
+      dest: /etc/randomfolder
+      mode: '644'
+    register: taskvar #info from the task can be stored here
+  - name:
+    debug:
+      var: taskvar  #spits out the info from the var as a python dictionary 
+      var: taskvar.failed # spits out the failed item in the dictionary
+      failed_when: taskvar.checksum != 'nd8324123891234nru2348912' #fails if true
+      verbosity: 2 #when running playbook, this will show if -vv is added 
+
+
+#for the inventory.yaml
+- hosts: ubuntu #
+  become: True
+  tasks:
+    - name: install
+      apt:
+        name: nginx
+        state: present
+        

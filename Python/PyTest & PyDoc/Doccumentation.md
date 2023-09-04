@@ -1,0 +1,1 @@
+-m pydoc -w <Filename>

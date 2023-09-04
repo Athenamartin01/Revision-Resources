@@ -1,0 +1,24 @@
+#used for grouping 
+#to us the inventories: ansible-playbook 
+devservers:
+  hosts:
+    dev1.internal.net
+      ansible_user: Athena
+    dev2.internal.net
+    dev3.internal.net
+testservers:
+  hosts:
+    test1.internal.net
+    test2.internal.net
+    test3.internal.net
+  vars:
+    ansible_user: ubuntu
+
+east-dc:
+  hosts:
+    dev3.internal.net
+    test1.internal.net
+west-dc:
+  hosts:
+    dev1.internal.net
+    dev2.internal.net

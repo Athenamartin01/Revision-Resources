@@ -1,0 +1,28 @@
+version: '3.7' #versions of compose spec
+services: #List all services 
+  duo-app-1: #indicate a specific service
+    container_name: #names container
+    image: Image_Name #defines a specific image to use
+    build: PATH or .  #defines path to specific Working directory and use dockerfile
+    ports: 
+      - target: 80 #defines host port
+        published: 80 #define container oprt
+        protocol: tcp #defines protocol
+    depends_on:
+      - duo-app-2 #depends on duo-app-2
+  duo-app-2:
+    image: Image_Name
+    environment:
+      - Var_Name=Var_Value #define environment variables
+    deploy:
+      replicas: 3 #deploys 3 replicas cotainers
+    networks:
+      - duo
+    volumes:
+    - type: volume
+      source: duo
+      target: /var/lib/mysql  
+networks:
+  duo: #creates a duo network for the builds 
+volumes:
+  duo: #creates a volume network for the builds

@@ -1,0 +1,7 @@
+# Used to split up tasks into collection as an executable
+# ansible-galaxy init
+
+# in vars folder:
+
+var1: var1
+var2: ["var2"]
