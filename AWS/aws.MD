@@ -19,3 +19,8 @@ Networking underpins other services
 
 #creating a keypair
 - aws ec2 create-key-pair --key-name my-cli-key --query KeyMaterial --output text > cli-key.pem
+
+
+#getting instance metadata
+- curl -w "\n" http://169.254.169.254/latest/meta-data/
+- curl -w "\n" http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key
